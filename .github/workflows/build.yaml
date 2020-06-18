@@ -1,0 +1,22 @@
+name: build
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: deps
+      run: |
+        sudo apt-get update
+        sudo apt-get install cmake libyaml-cpp-dev qt5-default
+    - name: cmake
+      run: |
+        cd traffic_editor
+        mkdir build
+        cd build
+        cmake ..
+    - name: make
+      run: |
+        cd traffic_editor/build
+        make
